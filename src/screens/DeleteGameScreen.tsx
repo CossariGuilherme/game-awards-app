@@ -3,10 +3,10 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 
 import { clientGetGames } from "../api/api";
 
-import { GameCard } from "../components/Votes/GameCard";
+import { GameCardDelete } from "../components/DeleteGame/GameCardDelete";
 import { Header } from "../components/Header/Header";
 
-export function VotesScreen(){
+export function DeleteGameScreen(){
     const [gameList, setGameList] = useState([])
     useEffect(() => {
         (async () => {
@@ -20,7 +20,7 @@ export function VotesScreen(){
             <Header />
 
             <ScrollView style={styles.gameArea}>
-                {gameList.map(game => GameCard(game))}
+                {gameList.map(game => GameCardDelete(game))}
             </ScrollView>
         </View>
     )

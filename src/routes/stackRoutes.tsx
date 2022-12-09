@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons"
 
 import { VotesScreen } from "../screens/VotesScreen";
 import { WinnerScreen } from "../screens/WinnerScreen";
-
+import { DeleteGameScreen } from "../screens/DeleteGameScreen";
 
 const { Screen, Navigator } = createBottomTabNavigator()
 
@@ -21,7 +21,8 @@ export function StackRoutes(){
                 position: 'absolute',
                 borderTopWidth: 0,
             }
-        })}
+        })
+    }
         >
             <Screen
             name="Votes"
@@ -47,6 +48,21 @@ export function StackRoutes(){
                 tabBarIcon: ({ color, size }) => (
                     <MaterialCommunityIcons
                         name="trophy"
+                        color="#6DFF60"
+                        size={size}
+                    />
+                )
+            }}
+            />
+            <Screen
+            name="Delete"
+            component={DeleteGameScreen}
+            options={{
+                tabBarLabel: 'Voltar',
+                tabBarActiveTintColor: 'white',
+                tabBarIcon: ({ color, size }) => (
+                    <MaterialCommunityIcons
+                        name="delete"
                         color="#6DFF60"
                         size={size}
                     />

@@ -1,4 +1,4 @@
-const baseApiURL = "http://localhoast:8080/api/"
+const baseApiURL = "http://localhost:8080/api/"
 
 
 export async function clientGetGames(){
@@ -21,4 +21,14 @@ export async function clientGetWinner(){
     const response = await fetch(`${baseApiURL}games`)
     const json = await response.json();
     return json[0]
+}
+export async function clientDeleteGame(id:number){
+
+    const requestOption = {
+        method: 'DELETE'
+    }
+    fetch(`${baseApiURL}games/${id}`, requestOption)
+    .then(response => response.text())
+    .then(result => console.log(result))
+    .catch(error => console.log('error', error));
 }
