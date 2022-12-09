@@ -22,6 +22,11 @@ export async function clientGetWinner(){
     const json = await response.json();
     return json[0]
 }
+export async function clientGetDetailGame(id:number){
+    const response = await fetch(`${baseApiURL}games/${id}`)
+    const json = await response.json();
+    return json
+}
 export async function clientDeleteGame(id:number){
 
     const requestOption = {

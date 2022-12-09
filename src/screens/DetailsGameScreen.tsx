@@ -1,14 +1,14 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { View, Text, StyleSheet } from "react-native";
 
 import { useFocusEffect } from "@react-navigation/native";
 
 import { gameInterface } from "../interfaces/gameInterface";
-import { clientGetWinner } from "../api/api";
+import { clientGetDetailGame } from "../api/api";
 
-import { Winner } from "../components/Winner/Winner";
+import { DetailGame } from "../components/DetailGame/DetailGame";
 
-export function WinnerScreen() {
+export function DetailsGameScreen(props: number | any) {
   const [game, setGame] = useState<gameInterface>({
     id: 0,
     name: "--",
@@ -17,21 +17,22 @@ export function WinnerScreen() {
     votes: 0,
   });
 
-  useFocusEffect(
+  useEffect(
     useCallback(() => {
-        (async() => {
-            const winner = await clientGetWinner()
-            setGame(winner)
-        })()
-    },[])
-  )
+      (async () => {
+        const detailGame = await clientGetDetailGame(props.route.params.id);
+        setGame(detailGame);
+      })();
+    }, [game])
+  );
 
   return (
     <View style={styles.container}>
-      <Winner 
-      name={game.name}
-      cover={game.cover}
-      votes={game.votes}
+      <DetailGame
+        name={game.name}
+        description={game.description}
+        cover={game.cover}
+        votes={game.votes}
       />
     </View>
   );

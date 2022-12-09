@@ -1,5 +1,7 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Button, Alert } from "react-native";
+import { View, Text, StyleSheet, Image, Button, Alert, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 import { clientSendingVotes } from "../../api/api";
 
@@ -16,9 +18,11 @@ const sendingVote = (id:number) => {
 }
 
 export function GameCard(props: gameInterface | any){
+    const navigation = useNavigation<StackNavigationProp<any>>();
     return(
         <View style={styles.Cardcontainer}>
             <View>
+                
                 <Image 
                  source={{uri: props.cover}}
                  style={styles.card}
@@ -32,6 +36,11 @@ export function GameCard(props: gameInterface | any){
                 title="Vote"
                 color="#9AC33C"
                 />
+            <TouchableOpacity
+            onPress={() => navigation.navigate("Details", { id: props.id })}
+             >
+                <Text style={styles.labelObs}>Saiba mais</Text>
+            </TouchableOpacity>
             </View>
         </View>
     )
@@ -57,6 +66,13 @@ const styles = StyleSheet.create({
         color: 'white',
         paddingBottom: 15,
         textAlign: 'center'
+    },
+    labelObs:{
+        fontSize: 15,
+        color: 'white',
+        paddingTop: 30,
+        textAlign: 'center',
+        textDecorationLine: 'underline'
     },
     infoContainer:{
         flex: 1,
